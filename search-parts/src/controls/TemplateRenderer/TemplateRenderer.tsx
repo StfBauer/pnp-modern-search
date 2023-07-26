@@ -28,7 +28,7 @@ export class TemplateRenderer extends React.Component<ITemplateRendererProps, IT
         this._domPurify = DOMPurify.default;
 
         this._domPurify.setConfig({
-            ADD_TAGS: ['style'],
+            ADD_TAGS: ['style', 'iframe'],
             ADD_ATTR: ['target', 'loading'],
             ALLOW_DATA_ATTR: true,
             ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|file|tel|callto|cid|xmpp|xxx|ms-\w+):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
@@ -134,7 +134,7 @@ export class TemplateRenderer extends React.Component<ITemplateRendererProps, IT
 
                     if (cssscope !== undefined && cssscope === "layer") {
 
-                        allStyles.push(`@layer { ${style.innerText} }`);
+                        allStyles.push(`@layer ${this.props.instanceId}; @layer ${this.props.instanceId} { ${style.innerText} }`);
 
                     } else {
 
